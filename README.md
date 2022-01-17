@@ -1,0 +1,1 @@
+# BDAMI_strona
