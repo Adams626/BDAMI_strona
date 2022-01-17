@@ -1,0 +1,50 @@
+body
+{
+	background-color: #1c1c1c !important;
+	color: #fffed5;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 17px;
+}
+
+main
+{
+	color: #fffed5;
+}
+
+h1
+{
+	font-size: 36px;
+	font-weight: 400;
+	color: #fffed5;
+	margin: 20px;
+}
+
+.title
+{
+	font-size: 32px !important;
+	font-weight: 400;
+	color: #111111;
+}
+
+
+.bg-coolors-1
+{
+	background-color: #1c1c1c !important;
+}
+.bg-coolors-2
+{
+	background-color: #111111 !important;
+}
+.bg-coolors-3
+{
+	background-color: #fffed5 !important;
+}
+.bg-coolors-4
+{
+	background-color: #fee402 !important;
+}
+.bg-coolors-5
+{
+	background-color: #fdca00 !important;
+}
+

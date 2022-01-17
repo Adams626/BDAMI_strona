@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+
+zeby przywrocic wczesniejszy kolor strony: zamiast bg-coolors-5 wpisac bg-warning
+
+usuniete z main.css:
+.jumpers
+{
+	text-align: center;
+}
+
+.jumpers img
+{
+	width: 100%;
+	height: auto;
+}
+
+.jumpers p
+{
+	margin-bottom: 30px;
+}
+
+.jumpers figcaption
+{
+	margin-top: 8px;
+}
+
+wwczesniejsza czcionka
+        <link href='https://fonts.googleapis.com/css?family=Lato|Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+moze sie przydac:
+
+main
+{
+	color: #fffed5;
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 9%;
+	margin-bottom: 5%;
+}
