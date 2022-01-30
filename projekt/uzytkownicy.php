@@ -2,8 +2,8 @@
 
     session_start();
 
+    $pageName = $_GET['action'] ?? null;
     
-
     require_once "connect.php";
     mysqli_report(MYSQLI_REPORT_STRICT);
     $mysqli = new mysqli($host, $db_user, $db_password, $db_name);
@@ -15,7 +15,7 @@
     }
 
     // SQL query to select data from database
-    $sql = "SELECT * FROM wpis ORDER BY id DESC ";
+    $sql = "SELECT * FROM uzytkownik ORDER BY imie ASC ";
     $result = $mysqli->query($sql);
     $mysqli->close();
         
@@ -106,6 +106,47 @@
         <main class="contentmargins">
 
             <br /><br /><br /><br />
+
+            <div class="container p-5 my-5 border bg-coolors-5 text-black">
+                <p>
+
+                    <?php if (is_null($pageName)) { ?>
+                        Tu pojawią się dane użytkownika kiedy zostanie wybrany.
+                    <?php } else { echo 'Wybrano użytkownika: '.$pageName; ?>
+                    
+                    <?php
+                        require_once "connect.php";
+                        mysqli_report(MYSQLI_REPORT_STRICT);
+                        $single_user_data = new mysqli($host, $db_user, $db_password, $db_name);
+                        $user_query = "SELECT * FROM uzytkownik WHERE id = '$pageName'";
+                        $user_result = $single_user_data->query($user_query);
+                        $single_user_data->close();
+                        while($rows=$user_result->fetch_assoc())
+                        {
+                            echo '<br />'.$rows['id'];
+                            echo '<br />'.$rows['login'];
+                            echo '<br />'.$rows['imie'];
+                            echo '<br />'.$rows ['nazwisko'];
+                            echo '<br />'.$rows['data_rejestracji'];
+                            echo '<br />'.$rows['mail'];
+                            echo '<br />'.$rows ['nr_tel'];
+                        }
+                    ?>
+
+                    <?php } ?>
+                        
+
+                </p>
+                <p><?php var_dump($pageName); ?></p>
+            </div>
+
+            <br /><br /><br /><br />
+
+            <center>
+                <div class="mt-4 display-4 text-white">
+                        Nasza społeczność
+                </div>
+            </center>
                       
 
             <section class="contentmargins">
@@ -116,13 +157,14 @@
                     ?>
                     
                     <div class="container p-5 my-5 border bg-coolors-5 text-black">
-                        <h2><?php echo $rows['tytul'];?></h2>
-                        <h6 ><?php echo $rows['tresc'];?></h6><br />
+                        <h2 ><?php echo $rows['imie'];?> <?php echo $rows['nazwisko'];?></h2>
+                        <h6><?php echo $rows['login'];?></h6><br />
                         <p>
-                            Opublikowano: <?php echo $rows['data_umieszczenia'];?>
-                             Typ ogłoszenia: <?php echo $rows['rodzaj'];?>
-                             Autor: <?php echo $rows['id_użytkownika'];?>
-                            Kategoria: <?php echo $rows['id_podkategorii'];?>
+                            Identyfikator użytkownika: <?php echo $rows['id'];?>
+                            
+                            <br />TEST TEST TEST<br />
+                            <?php echo '<a href="/uzytkownicy.php?action='.$rows['id'].'">'.$rows['id'].'</a>' ?>
+                            <br />TEST TEST TEST<br />
                         </p>
 
                     </div>
