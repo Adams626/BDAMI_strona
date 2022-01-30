@@ -2,7 +2,6 @@
 
     session_start();
 
-    
 
     require_once "connect.php";
     mysqli_report(MYSQLI_REPORT_STRICT);
@@ -15,7 +14,7 @@
     }
 
     // SQL query to select data from database
-    $sql = "SELECT * FROM wpis ORDER BY id DESC ";
+    $sql = "SELECT * FROM wpis WHERE rodzaj='zlecenie' ORDER BY id DESC ";
     $result = $mysqli->query($sql);
     $mysqli->close();
         
@@ -51,6 +50,7 @@
                 margin-top: 10px;
                 margin-bottom: 10px;
             }
+
         </style>
     
     </head>
@@ -106,9 +106,18 @@
         <main class="contentmargins">
 
             <br /><br /><br /><br />
-                      
+            
+            <?php
+            if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
+	        {
+		        echo '<a href="logout.php">[ Wyloguj się! ]</a><br />';
+	        }
+	        ?>
+
+            
 
             <section class="contentmargins">
+		
                     
                     <?php
                         while($rows=$result->fetch_assoc())
@@ -117,7 +126,7 @@
                     
                     <div class="container p-5 my-5 border bg-coolors-5 text-black">
                         <h2><?php echo $rows['tytul'];?></h2>
-                        <h6 ><?php echo $rows['tresc'];?></h6><br />
+                        <h5><?php echo $rows['tresc'];?></h5><br />
                         <p>
                             Opublikowano: <?php echo $rows['data_umieszczenia'];?>
                              Typ ogłoszenia: <?php echo $rows['rodzaj'];?>
@@ -127,10 +136,11 @@
 
                     </div>
                     
+                    
                     <?php
                         }
                     ?>
-
+                </table>
 	        </section>
 
 

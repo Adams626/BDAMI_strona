@@ -2,63 +2,23 @@
 
     session_start();
 
-    
-
-    require_once "connect.php";
-    mysqli_report(MYSQLI_REPORT_STRICT);
-    $mysqli = new mysqli($host, $db_user, $db_password, $db_name);
-
-    // Checking for connections
-    if ($mysqli->connect_error) 
-    {
-        die('Connect Error (' .$mysqli->connect_errno . ') '.$mysqli->connect_error);
-    }
-
-    // SQL query to select data from database
-    $sql = "SELECT * FROM wpis ORDER BY id DESC ";
-    $result = $mysqli->query($sql);
-    $mysqli->close();
-        
 ?>
-    
+
 <!DOCTYPE html>
-<html lang="pl">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="Portal do składania ofert oraz zleceń wykonania różnego typu prac.">
-        <meta name="keywords" content="praca, oferta, zlecenie, portal">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-        <title>Portal zleceniowy</title>
-
-        <link rel="stylesheet" href="css/fontello.css" type="text/css" />
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Konktakt</title>
+	<link rel="stylesheet" href="css/fontello.css" type="text/css" />
         <link rel="stylesheet" href="main.css" type="text/css" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&display=swap" rel="stylesheet" type='text/css'>
-
+        <link href='https://fonts.googleapis.com/css?family=Lato|Josefin+Sans&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-        <style>
-            .contentmargins {
-                padding: 20px;
-                margin-left: auto;
-                margin-right: auto;
-                margin-top: 10px;
-                margin-bottom: 10px;
-            }
-        </style>
-    
-    </head>
-
-    <body>
-        
-        <header>
-
+</head>
+<body>
+	<header>
             <nav class="navbar navbar-expand-lg navbar-light bg-coolors-5 fixed-top">
                 <div class="container-fluid">
                     <a class="navbar-brand title" href="index.php">
@@ -103,39 +63,51 @@
             </nav>
         </header>
 
-        <main class="contentmargins">
+        <br /><br /><br />
 
-            <br /><br /><br /><br />
-                      
+		<div class="m-5 p-5 bg-coolors-5 text-black rounded">
+			<center><h1>Strona w budowie</h1></center>
+			<p>Formularz kontaktu nie zyskał jeszcze funkcji życiowych! Prosimy o bezpośredni kontakt i przepraszamy za niedogodności.</p>
+		  </div>
 
-            <section class="contentmargins">
-                    
-                    <?php
-                        while($rows=$result->fetch_assoc())
-                        {
-                    ?>
-                    
-                    <div class="container p-5 my-5 border bg-coolors-5 text-black">
-                        <h2><?php echo $rows['tytul'];?></h2>
-                        <h6 ><?php echo $rows['tresc'];?></h6><br />
-                        <p>
-                            Opublikowano: <?php echo $rows['data_umieszczenia'];?>
-                             Typ ogłoszenia: <?php echo $rows['rodzaj'];?>
-                             Autor: <?php echo $rows['id_użytkownika'];?>
-                            Kategoria: <?php echo $rows['id_podkategorii'];?>
-                        </p>
+		<div class="container">
+			<div class="row">
+					<center><h1>Kontakt</h1></center>
+			</div>
+			<div class="love">
+					<h4 style="text-align:left">Skontaktuj się</h4>
+			</div>
+			<div class="row input-container">
+					<div class="col-xs-12">
+						<div class="styled-input wide">
+							<input type="text" required />
+							<label>Imie</label> 
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-12">
+						<div class="styled-input">
+							<input type="text" required />
+							<label>Email</label> 
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-12">
+						<div class="styled-input" style="float:right;">
+							<input type="text" required />
+							<label>Numer tel.</label> 
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="styled-input wide">
+							<textarea required></textarea>
+							<label>Wiadomość</label>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<div class="btn-lrg submit-btn">Send Message</div>
+					</div>
+			</div>
+		</div>
 
-                    </div>
-                    
-                    <?php
-                        }
-                    ?>
 
-	        </section>
-
-
-
-
-        </main>
-    </body>
+	</body>
 </html>

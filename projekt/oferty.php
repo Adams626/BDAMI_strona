@@ -2,23 +2,32 @@
 
     session_start();
 
-    if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
+
+    require_once "connect.php";
+    mysqli_report(MYSQLI_REPORT_STRICT);
+    $mysqli = new mysqli($host, $db_user, $db_password, $db_name);
+
+    // Checking for connections
+    if ($mysqli->connect_error) 
     {
-        header('Location: profil.php');
-        exit();
+        die('Connect Error (' .$mysqli->connect_errno . ') '.$mysqli->connect_error);
     }
 
+    // SQL query to select data from database
+    $sql = "SELECT * FROM wpis WHERE rodzaj='oferta' ORDER BY id DESC ";
+    $result = $mysqli->query($sql);
+    $mysqli->close();
+        
 ?>
-
-
+    
 <!DOCTYPE html>
 <html lang="pl">
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Portal do składania ofert oraz zleceń wykonania różnego typu prac.">
         <meta name="keywords" content="praca, oferta, zlecenie, portal">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <title>Portal zleceniowy</title>
 
@@ -32,6 +41,16 @@
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <style>
+            .contentmargins {
+                padding: 20px;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        </style>
     
     </head>
 
@@ -81,25 +100,48 @@
                 </div>
             </div>
         </nav>
-    </header>
+        </header>
 
-        <main>
+        <main class="contentmargins">
 
             <br /><br /><br /><br />
             
-            <div class="m-4">
-                <form action="zaloguj.php" method="post">
-                    Login: <br /> <input type="text" name="login"/> <br /><br />
-                    Hasło: <br /> <input type="password" name="haslo"/> <br /><br />
-                    <input type="submit" value="Zaloguj się" />
-                </form>
-            </div>
-
-        <?php
-        if (isset ($_SESSION['blad']))  echo $_SESSION['blad'];
-        ?>
+            <?php
+            if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
+	        {
+		        echo '<a href="logout.php">[ Wyloguj się! ]</a><br />';
+	        }
+	        ?>
 
             
+
+            <section class="contentmargins">
+		
+                    
+                    <?php
+                        while($rows=$result->fetch_assoc())
+                        {
+                    ?>
+                    
+                    <div class="container p-5 my-5 border bg-coolors-5 text-black">
+                        <h2><?php echo $rows['tytul'];?></h2>
+                        <h5><?php echo $rows['tresc'];?></h5><br />
+                        <p>
+                            Opublikowano: <?php echo $rows['data_umieszczenia'];?>
+                             Typ ogłoszenia: <?php echo $rows['rodzaj'];?>
+                             Autor: <?php echo $rows['id_użytkownika'];?>
+                            Kategoria: <?php echo $rows['id_podkategorii'];?>
+                        </p>
+
+                    </div>
+                    
+                    
+                    <?php
+                        }
+                    ?>
+                </table>
+	        </section>
+
 
 
 
